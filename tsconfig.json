@@ -17,10 +17,19 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "extstats-datatable": [
+        "dist/extstats-datatable"
+      ],
+      "extstats-datatable/*": [
+        "dist/extstats-datatable/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    "strictInjectionParameters": true,
+    "enableIvy": false
   }
 }

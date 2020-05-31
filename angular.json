@@ -2,5 +2,41 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "extstats-datatable": {
+      "projectType": "library",
+      "root": "projects/extstats-datatable",
+      "sourceRoot": "projects/extstats-datatable/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/extstats-datatable/tsconfig.lib.json",
+            "project": "projects/extstats-datatable/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/extstats-datatable/src/test.ts",
+            "tsConfig": "projects/extstats-datatable/tsconfig.spec.json",
+            "karmaConfig": "projects/extstats-datatable/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/extstats-datatable/tsconfig.lib.json",
+              "projects/extstats-datatable/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }},
+  "defaultProject": "extstats-datatable"
 }

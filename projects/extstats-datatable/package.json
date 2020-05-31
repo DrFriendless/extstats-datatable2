@@ -1,0 +1,9 @@
+{
+  "name": "extstats-datatable",
+  "version": "3.0.0",
+  "peerDependencies": {
+    "@angular/common": "^9.1.9",
+    "@angular/core": "^9.1.9",
+    "lodash": "^4.17.15"
+  }
+}
