@@ -37,6 +37,7 @@ export class TableController {
   @Input('table') table: DataTable;
   @Input('searchColumn') searchColumn: string;
   @Input('placeholder') placeholder: string = 'search term';
+  @Input('anywhere') anywhere = false;
   @ViewChild(Paginator, {static: true}) paginator: Paginator;
 
   public searchValue = "";
@@ -46,26 +47,19 @@ export class TableController {
   public pages(): number[] {
     const result = [];
     const totalPages = this.paginator.lastPage;
-    this.addPage(1, totalPages, result);
-    this.addPage((this.paginator.activePage + 1) / 2, totalPages, result);
-    this.addPage(this.paginator.activePage - 1, totalPages, result);
-    this.addPage((this.paginator.activePage + totalPages) / 2, totalPages, result);
-    this.addPage(this.paginator.activePage, totalPages, result);
-    this.addPage(this.paginator.activePage + 1, totalPages, result);
-    this.addPage(totalPages, totalPages, result);
+    addPage(1, totalPages, result);
+    addPage((this.paginator.activePage + 1) / 2, totalPages, result);
+    addPage(this.paginator.activePage - 1, totalPages, result);
+    addPage((this.paginator.activePage + totalPages) / 2, totalPages, result);
+    addPage(this.paginator.activePage, totalPages, result);
+    addPage(this.paginator.activePage + 1, totalPages, result);
+    addPage(totalPages, totalPages, result);
     if (result.length < 7) {
-      this.addPage((this.paginator.activePage + totalPages / 10), totalPages, result);
-      this.addPage(this.paginator.activePage - totalPages / 10, totalPages, result);
+      addPage((this.paginator.activePage + totalPages / 10), totalPages, result);
+      addPage(this.paginator.activePage - totalPages / 10, totalPages, result);
     }
     result.sort((a, b) => a - b);
     return result;
-  }
-
-  private addPage(page: number, totalPages: number, pages: number[]) {
-    const p = Math.round(page);
-    if (p > 0 && p <= totalPages && pages.indexOf(p) < 0) {
-      pages.push(p);
-    }
   }
 
   public search(event: any) {
@@ -73,7 +67,8 @@ export class TableController {
     let index = 0;
     for (const row of this.getSortedData()) {
       const v = row[this.searchColumn].toString();
-      if (v.toLowerCase().startsWith(searchTerm)) {
+      if ((!this.anywhere && v.toLowerCase().startsWith(searchTerm)) ||
+        (this.anywhere && v.toLowerCase().indexOf(searchTerm) >= 0)) {
         const p = Math.floor(index / this.paginator.rowsOnPage);
         this.paginator.setPage(p + 1);
         break;
@@ -107,5 +102,12 @@ export class TableController {
       }
       return value;
     };
+  }
+}
+
+function addPage(page: number, totalPages: number, pages: number[]) {
+  const p = Math.round(page);
+  if (p > 0 && p <= totalPages && pages.indexOf(p) < 0) {
+    pages.push(p);
   }
 }
