@@ -8,8 +8,6 @@ import {Paginator} from './Paginator';
 import {TableController} from './TableController';
 import {CommonModule} from '@angular/common';
 
-
-
 @NgModule({
   declarations: [
     BootstrapPaginator,

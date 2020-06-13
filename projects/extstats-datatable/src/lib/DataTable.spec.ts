@@ -1,4 +1,3 @@
-///<reference path="../node_modules/@types/jasmine/index.d.ts"/>
 import {SimpleChange, Component} from "@angular/core";
 import {DataTable} from "./DataTable";
 import {TestBed, ComponentFixture} from "@angular/core/testing";

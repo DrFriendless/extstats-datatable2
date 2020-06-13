@@ -3,4 +3,4 @@
 rm -rf dist/*
 ng build extstats-datatable
 cd dist/extstats-datatable
-npm publish $*
+npm pack $*
