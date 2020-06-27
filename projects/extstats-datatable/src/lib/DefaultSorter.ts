@@ -5,7 +5,7 @@ import {SortEvent} from "./model";
 @Component({
     selector: "mfDefaultSorter",
     template: `
-        <a style="cursor: pointer" (click)="sort()" class="text-nowrap">
+        <a style="cursor: pointer" (click)="sort()" class="mf-default-sorter">
             <ng-content></ng-content>
             <span *ngIf="isSortedByMeAsc" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
             <span *ngIf="isSortedByMeDesc" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>

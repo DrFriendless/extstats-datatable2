@@ -4,7 +4,9 @@ import {Column} from "./model";
 @Component({
     selector: "[mfHead]",
     template: `<tr>
-        <th *ngFor="let column of columns"><mfDefaultSorter by="{{column.field}}" title="{{column.tooltip}}">{{column.name}}</mfDefaultSorter></th>
+        <th *ngFor="let column of columns" [attr.class]="column.classname || null">
+          <mfDefaultSorter by="{{column.field}}" title="{{column.tooltip}}">{{column.name}}</mfDefaultSorter>
+        </th>
     </tr>`
 })
 export class DataTableHead<R extends object> {
